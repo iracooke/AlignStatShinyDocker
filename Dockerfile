@@ -14,10 +14,8 @@
 # changing permissions on those directories etc.
 
 #FROM centos-with-ssh:latest
-FROM centos:latest
+FROM docker-io-centos-with-ssh:latest
 MAINTAINER Benji Wakely <b.wakely@latrobe.edu.au>
-
-RUN yum install -y epel-release
 
 RUN yum install -y cmake \
 					make \
@@ -77,18 +75,16 @@ EXPOSE 3838
 # Already done in the parent container.
 # If modifying this dockerfile to generate a standalone container,
 # please touch / create '/etc/supervisord.conf'
-RUN echo "[supervisord]" > /etc/supervisord.conf && \
-    echo "nodaemon=true" >> /etc/supervisord.conf && \
-    echo "" >> /etc/supervisord.conf && \
-    echo "[program:sshd]" >> /etc/supervisord.conf && \
-    echo "command=/usr/sbin/sshd -D " >> /etc/supervisord.conf && \
-    echo "[program:httpd]" >> /etc/supervisord.conf && \
-    echo "command=/usr/sbin/apachectl -D FOREGROUND" >> /etc/supervisord.conf
+#RUN echo "[supervisord]" > /etc/supervisord.conf && \
+#    echo "nodaemon=true" >> /etc/supervisord.conf && \
+#    echo "" >> /etc/supervisord.conf && \
+#    echo "[program:sshd]" >> /etc/supervisord.conf && \
+#    echo "command=/usr/sbin/sshd -D " >> /etc/supervisord.conf && \
+#    echo "[program:httpd]" >> /etc/supervisord.conf && \
+#    echo "command=/usr/sbin/apachectl -D FOREGROUND" >> /etc/supervisord.conf
 
 # The above is already set up in the base image, centos-with-ssh:latest
 COPY shiny-server.conf /etc/shiny-server/
-
-RUN ssh-keygen -t rsa -f /root/.ssh/ssh_host_rsa_key -N ''
 
 RUN echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0A4feEXOoT0NW1buzUyxaQZmAojuLqCGn1q5acuU7g0ib/Q9huvDodRu642KJFp6VofdGkNMKFOe7kzVHRkDoO8Hy0QVP1xygPol7U1da8XeSbLxpzVaVftuWb9XOukqiJmRiX2ElvT9KAkrDuwnEchynkPfF81DFBZnEsYW3yKGNfYq+fgzf+4yTaAvqFA0FvvVMIwh/NUf5Ct10u5kD1zyz50ZTBoF/tEmtleMWrl+zMRj6WQtZftDnL8JF83m5SU8R54GRQwYAKkGCiK+F+OzI5Zxbz3VYWlKsixMELGv6xE11AZ8t684LdBHaDIrox8SZruAzHexjV7aOVFbXQ==' >> /root/.ssh/authorized_keys
 
