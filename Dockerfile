@@ -63,10 +63,10 @@ RUN R -e "install.packages(c('devtools'), repos='https://cran.rstudio.com/')"
 
 RUN R -e 'devtools::install_github("iracooke/AlignStat")'
 
-RUN wget https://github.com/iracooke/AlignStatShiny/archive/v1.0.1.zip && \
-    unzip v1.0.1.zip && \
+RUN wget https://github.com/iracooke/AlignStatShiny/archive/v1.2.1.zip && \
+    unzip v1.2.1.zip && \
     mkdir -p /srv/shiny-server/alignstat && \
-    cp AlignStatShiny-v1.0.1/*.R /srv/shiny-server/alignstat/
+    cp AlignStatShiny-v1.2.1/*.R /srv/shiny-server/alignstat/
 
 RUN ln -s /usr/local/shiny-server/bin/shiny-server /usr/bin/shiny-server
 
