@@ -3,7 +3,7 @@
 To build
 
 ```
-    docker build -t iracooke:alignstatshiny_v1 .
+    docker build -t iracooke:alignstatshiny_v1 github.com/iracooke/AlignStatShiny
 ```
 
 To Run
